@@ -5,6 +5,11 @@ using ClientPlugin.Settings.Layouts;
 using HarmonyLib;
 using Sandbox.Graphics.GUI;
 using VRage.Plugins;
+using ClientPlugin.External.Config;
+using Microsoft.Xml.Serialization.GeneratedAssembly;
+using System.IO;
+using VRage.FileSystem;
+using VRage.Utils;
 
 namespace ClientPlugin
 {
@@ -12,19 +17,37 @@ namespace ClientPlugin
     public class Plugin : IPlugin, IDisposable
     {
         public const string Name = "DisableGravityGeneratorClientSim";
+
+        PersistentConfig<PluginConfig> _config;
+        public IPluginConfig PluginConfig => _config?.Data;
+
+        static readonly string ConfigFileName = $"{Name}.cfg";
+
         public static Plugin Instance { get; private set; }
-        private SettingsGenerator settingsGenerator;
+        internal SettingsGenerator SettingsGenerator { get; private set; }
+
+
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
         public void Init(object gameInstance)
         {
             Instance = this;
-            Instance.settingsGenerator = new SettingsGenerator();
+            SettingsGenerator = new SettingsGenerator();
+
+            var configPathName = Path.Combine(MyFileSystem.UserDataPath, ConfigFileName);
+            _config = PersistentConfig<PluginConfig>.Load(configPathName);
+
+            MyLog.Default.Info($"{Name}: Initializing patches...");
 
             // TODO: Put your one time initialization code here.
             Harmony harmony = new Harmony(Name);
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
+
+
+        public void SaveConfigNow() => _config.SaveNow();
+
+
 
         public void Dispose()
         {
@@ -36,20 +59,14 @@ namespace ClientPlugin
 
         public void Update()
         {
-            // TODO: Put your update code here. It is called on every simulation frame!
+
         }
 
         // ReSharper disable once UnusedMember.Global
         public void OpenConfigDialog()
         {
-            Instance.settingsGenerator.SetLayout<Simple>();
-            MyGuiSandbox.AddScreen(Instance.settingsGenerator.Dialog);
+            Instance.SettingsGenerator.SetLayout<SettingsLayout>();
+            MyGuiSandbox.AddScreen(Instance.SettingsGenerator.Dialog);
         }
-
-        //TODO: Uncomment and use this method to load asset files
-        /*public void LoadAssets(string folder)
-        {
-
-        }*/
     }
 }

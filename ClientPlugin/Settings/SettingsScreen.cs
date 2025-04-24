@@ -38,6 +38,7 @@ namespace ClientPlugin.Settings
             CanHideOthers = true;
             CanBeHidden = true;
             CloseButtonEnabled = true;
+            Align = VRage.Utils.MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_CENTER;
         }
 
         public void UpdateSize(Vector2 screenSize)
@@ -54,7 +55,6 @@ namespace ClientPlugin.Settings
 
         public override void OnRemoved()
         {
-            ConfigStorage.Save(Config.Current);
             base.OnRemoved();
         }
 
