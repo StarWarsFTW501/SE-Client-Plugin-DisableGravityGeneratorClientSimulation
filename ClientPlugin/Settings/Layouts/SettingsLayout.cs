@@ -11,7 +11,7 @@ namespace ClientPlugin.Settings.Layouts
     {
         MyGuiControlList List;
 
-        public override Vector2 SettingsPanelSize => new Vector2(0.5f, 0.5f);
+        public override Vector2 SettingsPanelSize => new Vector2(0.5f, 0.3f);
 
         public SettingsLayout(Func<List<List<Control>>> getControls) : base(getControls) { }
 

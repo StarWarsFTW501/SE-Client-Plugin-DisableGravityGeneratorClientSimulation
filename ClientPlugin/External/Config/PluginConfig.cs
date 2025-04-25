@@ -35,7 +35,7 @@ namespace ClientPlugin.External.Config
 
         bool _disableUpdate = true;
 
-        [Checkbox("Toggle Plugin", "Switch for the plugin's inhibition of gravity generator updates")]
+        [Checkbox("Toggle Plugin", "Switch for the plugin's inhibition of gravity generator updates on servers")]
         public bool DisableUpdate
         {
             get => _disableUpdate;
@@ -46,7 +46,7 @@ namespace ClientPlugin.External.Config
                     MyPatchUtilities.ForceFieldUpdates();
             }
         }
-        [Button("Confirm", "Confirm the changes")]
+        [CenteredButton("Save", "Save the changes immediately")]
         public void ConfirmButton()
         {
             Plugin.Instance.SaveConfigNow();

@@ -6,12 +6,12 @@ using VRage.Utils;
 
 namespace ClientPlugin.Settings.Elements
 {
-    internal class ButtonAttribute : Attribute, IElement
+    internal class CenteredButtonAttribute : Attribute, IElement
     {
         public readonly string Label;
         public readonly string Description;
 
-        public ButtonAttribute(string label = null, string description = null)
+        public CenteredButtonAttribute(string label = null, string description = null)
         {
             Label = label;
             Description = description;
@@ -26,7 +26,7 @@ namespace ClientPlugin.Settings.Elements
             return new List<Control>()
             {
                 new Control(new MyGuiControlLabel(text: ""), fixedWidth: Control.LabelMinWidth),
-                new Control(button, originAlign: MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_TOP),
+                new Control(button, originAlign: MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_TOP),
             };
         }
         public List<Type> SupportedTypes { get; } = new List<Type>()

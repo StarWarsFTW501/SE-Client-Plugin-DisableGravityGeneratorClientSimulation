@@ -15,7 +15,7 @@ namespace ClientPlugin.External.Config
     {
         private T data;
         private Timer saveConfigTimer;
-        private const int SaveDelay = 2000;
+        private const int SaveDelay = 5000;
 
         private string Path { get; }
 

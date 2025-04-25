@@ -634,7 +634,7 @@
     <Compile Include="MyPatchUtilities.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\Elements\Button.cs" />
+    <Compile Include="Settings\Elements\CenteredButton.cs" />
     <Compile Include="Settings\Elements\Checkbox.cs" />
     <Compile Include="Settings\Elements\Color.cs" />
     <Compile Include="Settings\Elements\Control.cs" />
