@@ -24,7 +24,9 @@ namespace ClientPlugin
             if (!Sync.IsServer && Plugin.Instance.PluginConfig.DisableUpdate)
             {
                 IMyEntity entity = body.GetEntity(0U);
-                if (entity == null || entity is MyVirtualMass)
+
+                // Lord have mercy for what I'm about to do... I really didn't want to use the mod API but there's no other way
+                if (entity == null || entity is SpaceEngineers.Game.ModAPI.IMyVirtualMass)
                     return false;
             }
             return true;
