@@ -5,10 +5,10 @@ For compatibility purposes, gravity generator updates are not fully inhibited. Y
   
 Use the settings window of the plugin through Plugin Loader or enter the '/inhibitgravgens' chat command to switch the plugin on or off on the fly! This completely enables or disables any plugin interference with the game, so you don't have to unload it from Plugin Loader if you ever wish to not use it.
 
-**Plugin Loader is required to use this plugin!**
+[Plugin Loader](https://github.com/sepluginloader/PluginLoader/) **is required to use this plugin!**
 
 Though it is not officially listed in Plugin Loader's plugin list, the plugin is 100% safe. You will, however, need to download it as a local plugin because of this.
-1. Get the `DisableGravityGeneratorClientSim.dll` file from the Releases panel of this repository.
+1. Get the `DisableGravityGeneratorClientSim.dll` file from the [Releases](https://github.com/StarWarsFTW501/SE-Client-Plugin-DisableGravityGeneratorClientSimulation/releases) panel of this repository.
 2. Move or copy the file to `[space_engineers_installation]/Bin64/Plugins/Local`
 3. Enable the plugin in Plugin Loader using the plus (+) icon below the plugin list.
 4. Press 'Apply' - this will prompt you to restart the game.
