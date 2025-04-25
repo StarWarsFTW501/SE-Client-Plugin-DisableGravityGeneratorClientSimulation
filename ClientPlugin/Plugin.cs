@@ -10,6 +10,8 @@ using Microsoft.Xml.Serialization.GeneratedAssembly;
 using System.IO;
 using VRage.FileSystem;
 using VRage.Utils;
+using Sandbox.ModAPI;
+using Sandbox.Game.Gui;
 
 namespace ClientPlugin
 {
@@ -17,6 +19,7 @@ namespace ClientPlugin
     public class Plugin : IPlugin, IDisposable
     {
         public const string Name = "DisableGravityGeneratorClientSim";
+        public const string FriendlyName = "GravGen Simulation Inhibitor";
 
         PersistentConfig<PluginConfig> _config;
         public IPluginConfig PluginConfig => _config?.Data;
@@ -36,6 +39,8 @@ namespace ClientPlugin
 
             var configPathName = Path.Combine(MyFileSystem.UserDataPath, ConfigFileName);
             _config = PersistentConfig<PluginConfig>.Load(configPathName);
+
+            MyAPIUtilities.Static.MessageEntered += ChatEntered;
 
             MyLog.Default.Info($"{Name}: Initializing patches...");
 
@@ -67,6 +72,16 @@ namespace ClientPlugin
         {
             Instance.SettingsGenerator.SetLayout<SettingsLayout>();
             MyGuiSandbox.AddScreen(Instance.SettingsGenerator.Dialog);
+        }
+
+        void ChatEntered(string messageText, ref bool sendToOthers)
+        {
+            if (messageText.Equals("/inhibitgravgens", StringComparison.OrdinalIgnoreCase))
+            {
+                sendToOthers = false;
+                bool newValue = PluginConfig.DisableUpdate = !PluginConfig.DisableUpdate;
+                MyHud.Chat.ShowMessage(FriendlyName, $"Gravity generator simulation inhibition on servers now {(newValue ? "ON" : "OFF")}");
+            }
         }
     }
 }
